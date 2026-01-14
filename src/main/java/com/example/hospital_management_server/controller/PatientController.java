@@ -2,6 +2,8 @@ package com.example.hospital_management_server.controller;
 
 import com.example.hospital_management_server.dto.PatientDto;
 import com.example.hospital_management_server.service.PatientService;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.Email;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,6 +29,12 @@ public class PatientController {
     @GetMapping("/{id}")
     public ResponseEntity<PatientDto> getById(@PathVariable("id") Long Id){
         PatientDto patientDtoList = patientService.getPatientById(Id);
+        return ResponseEntity.ok(patientDtoList);
+    }
+
+    @GetMapping("/email/{email}")
+    public ResponseEntity<PatientDto> getById(@PathVariable("email") @Email(message = "Enter valid email") String email){
+        PatientDto patientDtoList = patientService.getPatientByEmail(email);
         return ResponseEntity.ok(patientDtoList);
     }
 

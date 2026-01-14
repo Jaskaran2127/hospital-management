@@ -18,24 +18,20 @@ public class PatientService {
     ModelMapper modelMapper = new ModelMapper();
 
     public List<PatientDto> getAllPatient(){
-        try {
             List<Patient> allPatients = patientRepository.findAll();
             List<PatientDto> allPatientDto = allPatients.stream().map(patient -> modelMapper.map(patient,PatientDto.class)).toList();
             return allPatientDto;
-        }
-        catch (Exception e) {
-            throw new RuntimeException("Error fetching patients: " + e.getMessage(), e);
-        }
     }
 
     public PatientDto getPatientById(Long Id){
-        try {
             Patient matchedPatient = patientRepository.findById(Id).orElseThrow(()-> new RuntimeException(("No Patient exist with id " + Id)));
             PatientDto dtoPatient = modelMapper.map(matchedPatient, PatientDto.class);
             return dtoPatient;
-        }
-        catch (Exception e) {
-            throw new RuntimeException("Error fetching patients: " + e.getMessage(), e);
-        }
+    }
+
+    public PatientDto getPatientByEmail(String email){
+                Patient matchedPatient = patientRepository.findByEmail(email).orElseThrow(()-> new RuntimeException(("No Patient exist with email " + email)));
+                PatientDto dtoPatient = modelMapper.map(matchedPatient, PatientDto.class);
+                return dtoPatient;
     }
 }

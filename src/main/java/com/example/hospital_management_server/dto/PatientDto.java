@@ -1,20 +1,17 @@
 package com.example.hospital_management_server.dto;
 
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
 import java.time.LocalDate;
 
 public class PatientDto {
-    public Long id;
+    private Long id;
 
-    public String name;
+    private String name;
 
-    public LocalDate birthDate;
+    private LocalDate birthDate;
 
-    public String email;
+    private String email;
 
-    public String gender;
+    private String gender;
 
     public PatientDto(Long id, String name, LocalDate birthDate, String email, String gender) {
         this.id = id;

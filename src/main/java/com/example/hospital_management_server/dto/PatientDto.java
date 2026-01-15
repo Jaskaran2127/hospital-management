@@ -1,5 +1,7 @@
 package com.example.hospital_management_server.dto;
 
+import com.example.hospital_management_server.entity.types.GenderTypes;
+
 import java.time.LocalDate;
 
 public class PatientDto {
@@ -11,9 +13,9 @@ public class PatientDto {
 
     private String email;
 
-    private String gender;
+    private GenderTypes gender;
 
-    public PatientDto(Long id, String name, LocalDate birthDate, String email, String gender) {
+    public PatientDto(Long id, String name, LocalDate birthDate, String email, GenderTypes gender) {
         this.id = id;
         this.name = name;
         this.birthDate = birthDate;
@@ -56,11 +58,11 @@ public class PatientDto {
         this.email = email;
     }
 
-    public String getGender() {
+    public GenderTypes getGender() {
         return gender;
     }
 
-    public void setGender(String gender) {
+    public void setGender(GenderTypes gender) {
         this.gender = gender;
     }
 

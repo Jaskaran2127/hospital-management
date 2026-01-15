@@ -1,22 +1,35 @@
 package com.example.hospital_management_server.entity;
 
+import com.example.hospital_management_server.entity.types.GenderTypes;
 import jakarta.persistence.*;
+import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDate;
 
 @Entity
 @Table(name = "patient",uniqueConstraints = {
-        @UniqueConstraint(name="unique_patient_email",columnNames = {"email"}),
+//        @UniqueConstraint(name="unique_patient_email",columnNames = {"email"}),
         @UniqueConstraint(name="unique_patient_name_birthDate",columnNames = {"name","birthDate"})
-})
+},indexes = {@Index(name = "idx_patient_birth_date",columnList = "birthDate")})
 public class Patient {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+//    @Column(name = "patient_name",nullable = false,length = 40)
     private String name;
 
     private LocalDate birthDate;
+
+    @Column(unique = true,nullable = false)
+    private String email;
+
+    @Enumerated(EnumType.STRING)
+    private GenderTypes gender;
+
+//    @CreationTimestamp
+//    @Column(updatable = false)
+//    private String createdAt;
 
     public Long getId() {
         return id;
@@ -50,17 +63,12 @@ public class Patient {
         this.email = email;
     }
 
-    public String getGender() {
+    public GenderTypes getGender() {
         return gender;
     }
-
-    public void setGender(String gender) {
+    public void setGender(GenderTypes gender) {
         this.gender = gender;
     }
-
-    private String email;
-
-    private String gender;
 
     @Override
     public String toString() {

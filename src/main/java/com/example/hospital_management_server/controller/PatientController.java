@@ -6,11 +6,9 @@ import jakarta.validation.Valid;
 import jakarta.validation.constraints.Email;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -21,8 +19,12 @@ public class PatientController {
     private PatientService patientService;
 
     @GetMapping("/get-all")
-    public ResponseEntity<List<PatientDto>> getAllPatientList(){
-        List<PatientDto> patientDtoList = patientService.getAllPatient();
+    public ResponseEntity<List<PatientDto>> getAllPatientList(
+            @RequestParam(required = false) String name,
+            @RequestParam(required = false) String email,
+            @RequestParam(required = false) LocalDate birthDate
+    ){
+        List<PatientDto> patientDtoList = patientService.getAllPatient(name, email, birthDate);
         return ResponseEntity.ok(patientDtoList);
     }
 
@@ -31,11 +33,4 @@ public class PatientController {
         PatientDto patientDtoList = patientService.getPatientById(Id);
         return ResponseEntity.ok(patientDtoList);
     }
-
-    @GetMapping("/email/{email}")
-    public ResponseEntity<PatientDto> getById(@PathVariable("email") @Email(message = "Enter valid email") String email){
-        PatientDto patientDtoList = patientService.getPatientByEmail(email);
-        return ResponseEntity.ok(patientDtoList);
-    }
-
 }

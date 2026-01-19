@@ -22,4 +22,7 @@ public interface PatientRepository extends JpaRepository<Patient, Long> {
     //or you can write query like "SELECT p from Patient p where p.bloodGroup = :bloodGroup"
     @Query("SELECT p from Patient p where p.bloodGroup = ?1")
     public List<Patient> findByBloodGroup(@Param(("bloodGroup")) BloodGroupTypes bloodGroup);
+
+    @Query(value = "SELECT * FROM patient WHERE blood_group = ?1",nativeQuery = true)
+    public List<Patient> findByNativeBloodGroup(@Param(("bloodGroup")) BloodGroupTypes bloodGroup);
 }

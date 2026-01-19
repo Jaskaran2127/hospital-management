@@ -74,7 +74,7 @@ public class Patient {
         this.gender = gender;
     }
 
-    public BloodGroupTypes getbloodGroup() {
+    public BloodGroupTypes getBloodGroup() {
         return bloodGroup;
     }
     public void setBloodGroup(BloodGroupTypes bloodGroup) {

@@ -46,14 +46,12 @@ public class PatientService {
     }
 
     public List<PatientDto> getAllPatientByBloodGroup(BloodGroupTypes bloodGroup){
-        System.out.println("check in here");
         List<Patient> allPatients=patientRepository.findByBloodGroup(BloodGroupTypes.A);
         List<PatientDto> allPatientDto = allPatients.stream().map(patient -> modelMapper.map(patient,PatientDto.class)).toList();
         return allPatientDto;
     }
 
     public List<BloodGroupCountDto> getGroupByBloodGroup(){
-        System.out.println("check in here");
         List<BloodGroupCountDto> allPatients=patientRepository.groupByBloodGroup();
         return allPatients;
     }

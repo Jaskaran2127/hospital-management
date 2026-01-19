@@ -7,6 +7,9 @@ import com.example.hospital_management_server.service.PatientService;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Email;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,9 +27,15 @@ public class PatientController {
     public ResponseEntity<List<PatientDto>> getAllPatientList(
             @RequestParam(required = false) String name,
             @RequestParam(required = false) String email,
-            @RequestParam(required = false) LocalDate birthDate
+            @RequestParam(required = false) LocalDate birthDate,
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "5") int size,
+            @RequestParam(defaultValue = "id") String sortBy,
+            @RequestParam(defaultValue = "true") boolean ascending
     ){
-        List<PatientDto> patientDtoList = patientService.getAllPatient(name, email, birthDate);
+        Sort sort = ascending ? Sort.by(sortBy).ascending() : Sort.by(sortBy).descending();
+        Pageable pageable = PageRequest.of(page, size, sort);
+        List<PatientDto> patientDtoList = patientService.getAllPatient(name, email, birthDate, pageable);
         return ResponseEntity.ok(patientDtoList);
     }
 

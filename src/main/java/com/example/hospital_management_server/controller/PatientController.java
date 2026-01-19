@@ -1,5 +1,6 @@
 package com.example.hospital_management_server.controller;
 
+import com.example.hospital_management_server.dto.BloodGroupCountDto;
 import com.example.hospital_management_server.dto.PatientDto;
 import com.example.hospital_management_server.entity.types.BloodGroupTypes;
 import com.example.hospital_management_server.service.PatientService;
@@ -38,6 +39,12 @@ public class PatientController {
     @GetMapping("blood-group/{bg}")
     public ResponseEntity<List<PatientDto>> getByBloodGroup(@PathVariable("bg") BloodGroupTypes bg){
         List<PatientDto> patientDtoList = patientService.getAllPatientByBloodGroup(bg);
+        return ResponseEntity.ok(patientDtoList);
+    }
+
+    @GetMapping("blood-group")
+    public ResponseEntity<List<BloodGroupCountDto>> getbyBloodGroupType (){
+        List<BloodGroupCountDto> patientDtoList = patientService.getGroupByBloodGroup();
         return ResponseEntity.ok(patientDtoList);
     }
 }

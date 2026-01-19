@@ -1,5 +1,6 @@
 package com.example.hospital_management_server.service;
 
+import com.example.hospital_management_server.dto.BloodGroupCountDto;
 import com.example.hospital_management_server.dto.PatientDto;
 import com.example.hospital_management_server.entity.Patient;
 import com.example.hospital_management_server.entity.types.BloodGroupTypes;
@@ -47,5 +48,11 @@ public class PatientService {
         List<Patient> allPatients=patientRepository.findByBloodGroup(BloodGroupTypes.A);
         List<PatientDto> allPatientDto = allPatients.stream().map(patient -> modelMapper.map(patient,PatientDto.class)).toList();
         return allPatientDto;
+    }
+
+    public List<BloodGroupCountDto> getGroupByBloodGroup(){
+        System.out.println("check in here");
+        List<BloodGroupCountDto> allPatients=patientRepository.groupByBloodGroup();
+        return allPatients;
     }
 }

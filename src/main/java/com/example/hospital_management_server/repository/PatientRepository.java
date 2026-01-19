@@ -1,5 +1,6 @@
 package com.example.hospital_management_server.repository;
 
+import com.example.hospital_management_server.dto.BloodGroupCountDto;
 import com.example.hospital_management_server.entity.Patient;
 import com.example.hospital_management_server.entity.types.BloodGroupTypes;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -25,4 +26,7 @@ public interface PatientRepository extends JpaRepository<Patient, Long> {
 
     @Query(value = "SELECT * FROM patient WHERE blood_group = ?1",nativeQuery = true)
     public List<Patient> findByNativeBloodGroup(@Param(("bloodGroup")) BloodGroupTypes bloodGroup);
+
+    @Query("SELECT new com.example.hospital_management_server.dto.BloodGroupCountDto(p.bloodGroup, Count(p)) from Patient p group by p.bloodGroup")
+    public List<BloodGroupCountDto> groupByBloodGroup();
 }

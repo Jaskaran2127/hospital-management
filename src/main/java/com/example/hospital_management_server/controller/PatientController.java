@@ -1,6 +1,7 @@
 package com.example.hospital_management_server.controller;
 
 import com.example.hospital_management_server.dto.PatientDto;
+import com.example.hospital_management_server.entity.types.BloodGroupTypes;
 import com.example.hospital_management_server.service.PatientService;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Email;
@@ -31,6 +32,12 @@ public class PatientController {
     @GetMapping("/{id}")
     public ResponseEntity<PatientDto> getById(@PathVariable("id") Long Id){
         PatientDto patientDtoList = patientService.getPatientById(Id);
+        return ResponseEntity.ok(patientDtoList);
+    }
+
+    @GetMapping("blood-group/{bg}")
+    public ResponseEntity<List<PatientDto>> getByBloodGroup(@PathVariable("bg") BloodGroupTypes bg){
+        List<PatientDto> patientDtoList = patientService.getAllPatientByBloodGroup(bg);
         return ResponseEntity.ok(patientDtoList);
     }
 }

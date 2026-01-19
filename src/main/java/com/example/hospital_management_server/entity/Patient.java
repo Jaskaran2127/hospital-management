@@ -1,5 +1,6 @@
 package com.example.hospital_management_server.entity;
 
+import com.example.hospital_management_server.entity.types.BloodGroupTypes;
 import com.example.hospital_management_server.entity.types.GenderTypes;
 import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
@@ -26,6 +27,9 @@ public class Patient {
 
     @Enumerated(EnumType.STRING)
     private GenderTypes gender;
+
+    @Enumerated(EnumType.STRING)
+    private BloodGroupTypes bloodGroup;
 
 //    @CreationTimestamp
 //    @Column(updatable = false)
@@ -70,6 +74,13 @@ public class Patient {
         this.gender = gender;
     }
 
+    public BloodGroupTypes getbloodGroup() {
+        return bloodGroup;
+    }
+    public void setBloodGroup(BloodGroupTypes bloodGroup) {
+        this.bloodGroup = bloodGroup;
+    }
+
     @Override
     public String toString() {
         return "Patient{" +
@@ -78,6 +89,7 @@ public class Patient {
                 ", birthDate=" + birthDate +
                 ", email='" + email + '\'' +
                 ", gender='" + gender + '\'' +
+                ", bloodGroup='" + bloodGroup + '\'' +
                 '}';
     }
 }

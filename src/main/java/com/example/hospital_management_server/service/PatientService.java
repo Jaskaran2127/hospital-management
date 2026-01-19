@@ -2,6 +2,7 @@ package com.example.hospital_management_server.service;
 
 import com.example.hospital_management_server.dto.PatientDto;
 import com.example.hospital_management_server.entity.Patient;
+import com.example.hospital_management_server.entity.types.BloodGroupTypes;
 import com.example.hospital_management_server.repository.PatientRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,5 +40,12 @@ public class PatientService {
             Patient matchedPatient = patientRepository.findById(Id).orElseThrow(()-> new RuntimeException(("No Patient exist with id " + Id)));
             PatientDto dtoPatient = modelMapper.map(matchedPatient, PatientDto.class);
             return dtoPatient;
+    }
+
+    public List<PatientDto> getAllPatientByBloodGroup(BloodGroupTypes bloodGroup){
+        System.out.println("check in here");
+        List<Patient> allPatients=patientRepository.findByBloodGroup(BloodGroupTypes.A);
+        List<PatientDto> allPatientDto = allPatients.stream().map(patient -> modelMapper.map(patient,PatientDto.class)).toList();
+        return allPatientDto;
     }
 }

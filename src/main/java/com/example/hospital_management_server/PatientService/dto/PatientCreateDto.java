@@ -1,4 +1,4 @@
-package com.example.hospital_management_server.dto;
+package com.example.hospital_management_server.PatientService.dto;
 
 import lombok.Data;
 

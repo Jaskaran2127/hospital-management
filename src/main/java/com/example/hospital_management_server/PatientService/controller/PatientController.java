@@ -1,11 +1,9 @@
-package com.example.hospital_management_server.controller;
+package com.example.hospital_management_server.PatientService.controller;
 
-import com.example.hospital_management_server.dto.BloodGroupCountDto;
-import com.example.hospital_management_server.dto.PatientDto;
-import com.example.hospital_management_server.entity.types.BloodGroupTypes;
-import com.example.hospital_management_server.service.PatientService;
-import jakarta.validation.Valid;
-import jakarta.validation.constraints.Email;
+import com.example.hospital_management_server.PatientService.dto.BloodGroupCountDto;
+import com.example.hospital_management_server.PatientService.dto.PatientDto;
+import com.example.hospital_management_server.PatientService.entity.types.BloodGroupTypes;
+import com.example.hospital_management_server.PatientService.service.PatientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -45,7 +43,7 @@ public class PatientController {
         return ResponseEntity.ok(patientDtoList);
     }
 
-    @GetMapping("blood-group/{bg}")
+        @GetMapping("blood-group/{bg}")
     public ResponseEntity<List<PatientDto>> getByBloodGroup(@PathVariable("bg") BloodGroupTypes bg){
         List<PatientDto> patientDtoList = patientService.getAllPatientByBloodGroup(bg);
         return ResponseEntity.ok(patientDtoList);

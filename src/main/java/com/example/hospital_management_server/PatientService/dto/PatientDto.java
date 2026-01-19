@@ -1,7 +1,7 @@
-package com.example.hospital_management_server.dto;
+package com.example.hospital_management_server.PatientService.dto;
 
-import com.example.hospital_management_server.entity.types.BloodGroupTypes;
-import com.example.hospital_management_server.entity.types.GenderTypes;
+import com.example.hospital_management_server.PatientService.entity.types.BloodGroupTypes;
+import com.example.hospital_management_server.PatientService.entity.types.GenderTypes;
 
 import java.time.LocalDate;
 
@@ -70,7 +70,7 @@ public class PatientDto {
         this.gender = gender;
     }
 
-    public BloodGroupTypes getbloodGroup() {
+    public BloodGroupTypes getBloodGroup() {
         return bloodGroup;
     }
     public void setBloodGroup(BloodGroupTypes bloodGroup) {

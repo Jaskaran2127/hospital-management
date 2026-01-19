@@ -1,8 +1,7 @@
 package com.example.hospital_management_server;
 
-import com.example.hospital_management_server.dto.BloodGroupCountDto;
-import com.example.hospital_management_server.entity.Patient;
-import com.example.hospital_management_server.repository.PatientRepository;
+import com.example.hospital_management_server.PatientService.dto.BloodGroupCountDto;
+import com.example.hospital_management_server.PatientService.repository.PatientRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;

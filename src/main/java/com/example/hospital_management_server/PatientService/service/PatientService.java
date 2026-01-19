@@ -1,10 +1,10 @@
-package com.example.hospital_management_server.service;
+package com.example.hospital_management_server.PatientService.service;
 
-import com.example.hospital_management_server.dto.BloodGroupCountDto;
-import com.example.hospital_management_server.dto.PatientDto;
-import com.example.hospital_management_server.entity.Patient;
-import com.example.hospital_management_server.entity.types.BloodGroupTypes;
-import com.example.hospital_management_server.repository.PatientRepository;
+import com.example.hospital_management_server.PatientService.dto.BloodGroupCountDto;
+import com.example.hospital_management_server.PatientService.dto.PatientDto;
+import com.example.hospital_management_server.PatientService.entity.Patient;
+import com.example.hospital_management_server.PatientService.entity.types.BloodGroupTypes;
+import com.example.hospital_management_server.PatientService.repository.PatientRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -22,7 +22,7 @@ public class PatientService {
 
     ModelMapper modelMapper = new ModelMapper();
 
-    public List<PatientDto> getAllPatient(String name, String email, LocalDate birthDate ,Pageable pageable){
+    public List<PatientDto> getAllPatient(String name, String email, LocalDate birthDate , Pageable pageable){
         Page<Patient> allPatients;
         if(name != null){
             allPatients = patientRepository.findDistinctByNameContaining(name,pageable);
@@ -46,14 +46,12 @@ public class PatientService {
     }
 
     public List<PatientDto> getAllPatientByBloodGroup(BloodGroupTypes bloodGroup){
-        System.out.println("check in here");
         List<Patient> allPatients=patientRepository.findByBloodGroup(BloodGroupTypes.A);
         List<PatientDto> allPatientDto = allPatients.stream().map(patient -> modelMapper.map(patient,PatientDto.class)).toList();
         return allPatientDto;
     }
 
     public List<BloodGroupCountDto> getGroupByBloodGroup(){
-        System.out.println("check in here");
         List<BloodGroupCountDto> allPatients=patientRepository.groupByBloodGroup();
         return allPatients;
     }

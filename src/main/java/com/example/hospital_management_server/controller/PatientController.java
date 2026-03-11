@@ -56,4 +56,16 @@ public class PatientController {
         List<BloodGroupCountDto> patientDtoList = patientService.getGroupByBloodGroup();
         return ResponseEntity.ok(patientDtoList);
     }
+
+    @PostMapping
+    public ResponseEntity<PatientDto> createPatient(@RequestBody PatientDto patientDto) {
+        PatientDto createdPatient = patientService.createPatient(patientDto);
+        return ResponseEntity.ok(createdPatient);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<PatientDto> updatePatient(@PathVariable("id") Long id, @RequestBody PatientDto patientDto) {
+        PatientDto updatedPatient = patientService.updatePatient(id, patientDto);
+        return ResponseEntity.ok(updatedPatient);
+    }
 }

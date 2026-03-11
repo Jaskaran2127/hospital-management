@@ -55,4 +55,24 @@ public class PatientService {
         List<BloodGroupCountDto> allPatients=patientRepository.groupByBloodGroup();
         return allPatients;
     }
+
+    public PatientDto createPatient(PatientDto patientDto) {
+        Patient patient = modelMapper.map(patientDto, Patient.class);
+        Patient savedPatient = patientRepository.save(patient);
+        return modelMapper.map(savedPatient, PatientDto.class);
+    }
+
+    public PatientDto updatePatient(Long id, PatientDto patientDto) {
+        Patient existingPatient = patientRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("No Patient exist with id " + id));
+
+        existingPatient.setName(patientDto.getName());
+        existingPatient.setBirthDate(patientDto.getBirthDate());
+        existingPatient.setEmail(patientDto.getEmail());
+        existingPatient.setGender(patientDto.getGender());
+        existingPatient.setBloodGroup(patientDto.getBloodGroup());
+
+        Patient updatedPatient = patientRepository.save(existingPatient);
+        return modelMapper.map(updatedPatient, PatientDto.class);
+    }
 }
